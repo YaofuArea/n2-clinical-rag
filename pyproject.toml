@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Chunking and retrieval experiments for clinical RAG on NIH patient-education pages"
 requires-python = ">=3.12"
 dependencies = [
+    "anthropic>=2.3.0",
     "fastembed>=0.9.0",
     "numpy>=2.5.4",
     "rank-bm25>=0.2.2",
