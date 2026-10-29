@@ -118,5 +118,35 @@
     "evidence": "Hypothyroidism can contribute to high cholesterol",
     "doc_id": "hypothyroidism",
     "type": "cross-topic"
+  },
+  {
+    "question": "What is the normal range for TSH?",
+    "evidence": null,
+    "doc_id": null,
+    "type": "unanswerable"
+  },
+  {
+    "question": "What dose of levothyroxine should I take?",
+    "evidence": null,
+    "doc_id": null,
+    "type": "unanswerable"
+  },
+  {
+    "question": "How much does an insulin pump cost?",
+    "evidence": null,
+    "doc_id": null,
+    "type": "unanswerable"
+  },
+  {
+    "question": "How do I treat a broken arm?",
+    "evidence": null,
+    "doc_id": null,
+    "type": "unanswerable"
+  },
+  {
+    "question": "What are the symptoms of a migraine?",
+    "evidence": null,
+    "doc_id": null,
+    "type": "unanswerable"
   }
 ]
