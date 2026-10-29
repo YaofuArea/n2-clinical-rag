@@ -54,7 +54,40 @@ class EmbeddingRetriever:
         return [(self.chunks[i], float(scores[i])) for i in top]
 
 
-RETRIEVERS = {"bm25": BM25Retriever, "embedding": EmbeddingRetriever}
+class HybridRetriever:
+    """BM25 + embeddings, merged with Reciprocal Rank Fusion (RRF).
+
+    BM25 scores (0 to ~10) and cosine similarities (0 to 1) are on different
+    scales, so RRF ignores the scores and uses only each chunk's rank:
+        score(chunk) = sum over retrievers of 1 / (RRF_K + rank)
+    A chunk ranked high by both retrievers beats one ranked high by only one.
+    """
+
+    RRF_K = 60  # the usual constant; larger values flatten the gap between ranks
+    CANDIDATES = 50  # how deep into each retriever's ranking we look
+
+    def __init__(self, chunks: list[Chunk]):
+        self.retrievers = [BM25Retriever(chunks), EmbeddingRetriever(chunks)]
+
+    def search(self, query: str, k: int = 5) -> list[tuple[Chunk, float]]:
+        fused: dict[str, float] = {}
+        by_id: dict[str, Chunk] = {}
+        for retriever in self.retrievers:
+            results = retriever.search(query, k=self.CANDIDATES)
+            for rank, (chunk, _score) in enumerate(results, start=1):
+                fused[chunk.chunk_id] = fused.get(chunk.chunk_id, 0) + 1 / (
+                    self.RRF_K + rank
+                )
+                by_id[chunk.chunk_id] = chunk
+        top = sorted(fused, key=fused.get, reverse=True)[:k]
+        return [(by_id[chunk_id], fused[chunk_id]) for chunk_id in top]
+
+
+RETRIEVERS = {
+    "bm25": BM25Retriever,
+    "embedding": EmbeddingRetriever,
+    "hybrid": HybridRetriever,
+}
 
 
 if __name__ == "__main__":
@@ -66,4 +99,4 @@ if __name__ == "__main__":
         print(f"\n== {name}")
         for chunk, score in retriever.search(query, k=3):
             preview = chunk.text.replace("\n", " ")[:110]
-            print(f"  {score:6.2f}  {chunk.chunk_id:28} {preview}")
+            print(f"  {score:7.4f}  {chunk.chunk_id:28} {preview}")
