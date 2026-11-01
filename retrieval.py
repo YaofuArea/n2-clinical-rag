@@ -13,11 +13,13 @@ import sys
 
 import numpy as np
 from fastembed import TextEmbedding
+from fastembed.rerank.cross_encoder import TextCrossEncoder
 from rank_bm25 import BM25Okapi
 
 from chunking import STRATEGIES, Chunk
 
 EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5"  # small (~67 MB), runs locally
+RERANK_MODEL = "Xenova/ms-marco-MiniLM-L-12-v2"  # cross-encoder (~120 MB), runs locally
 
 
 def tokenize(text: str) -> list[str]:
@@ -83,10 +85,35 @@ class HybridRetriever:
         return [(by_id[chunk_id], fused[chunk_id]) for chunk_id in top]
 
 
+class RerankRetriever:
+    """Embedding search for candidates, then a cross-encoder reorders them.
+
+    The embedding model encodes the question and each chunk separately, so it
+    compares two summaries. A cross-encoder reads the question and one chunk
+    together, so it can judge whether that chunk actually answers the question.
+    It is too slow to run over every chunk, so it only reranks the top candidates.
+    """
+
+    CANDIDATES = 20
+    _model = None  # loaded once and shared
+
+    def __init__(self, chunks: list[Chunk]):
+        if RerankRetriever._model is None:
+            RerankRetriever._model = TextCrossEncoder(RERANK_MODEL)
+        self.first_stage = EmbeddingRetriever(chunks)
+
+    def search(self, query: str, k: int = 5) -> list[tuple[Chunk, float]]:
+        candidates = [c for c, _ in self.first_stage.search(query, k=self.CANDIDATES)]
+        scores = list(self._model.rerank(query, [c.text for c in candidates]))
+        order = np.argsort(scores)[::-1][:k]
+        return [(candidates[i], float(scores[i])) for i in order]
+
+
 RETRIEVERS = {
     "bm25": BM25Retriever,
     "embedding": EmbeddingRetriever,
     "hybrid": HybridRetriever,
+    "rerank": RerankRetriever,
 }
 
 
