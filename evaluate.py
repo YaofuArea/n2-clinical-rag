@@ -1,14 +1,15 @@
 """Measure retrieval quality for every chunking strategy x retriever.
 
-A question counts as a hit at k if any of the top-k chunks contains the
-question's evidence text. This checks retrieval only; no answer is generated.
+A question counts as a hit at k if any of the top-k chunks contains any of
+the question's evidence strings (some answers appear in more than one place).
+This checks retrieval only; no answer is generated.
 
 Metrics (answerable questions only):
 - R@k: share of questions whose evidence is in the top k.
 - MRR: mean of 1/rank of the first hit (0 if not in the top 10). Unlike R@5,
   it still moves when a hit climbs from rank 3 to rank 1.
 
-Unanswerable questions (evidence: null) have no correct chunk, so they are
+Unanswerable questions (evidence: []) have no correct chunk, so they are
 left out here; they are used to test refusing to answer.
 
 Usage: uv run evaluate.py          (summary table)
@@ -25,15 +26,15 @@ from retrieval import RETRIEVERS
 ALL_QUESTIONS = json.loads(
     (Path(__file__).parent / "data" / "eval_questions.json").read_text()
 )
-QUESTIONS = [q for q in ALL_QUESTIONS if q["evidence"] is not None]
+QUESTIONS = [q for q in ALL_QUESTIONS if q["evidence"]]
 KS = [1, 3, 5]
 MRR_DEPTH = 10  # a hit below rank 10 counts as a miss for MRR
 
 
-def first_hit_rank(results, evidence: str) -> int | None:
-    """1-based rank of the first chunk that contains the evidence, or None."""
+def first_hit_rank(results, evidence: list[str]) -> int | None:
+    """1-based rank of the first chunk that contains any evidence string, or None."""
     for rank, (chunk, _score) in enumerate(results, start=1):
-        if evidence in chunk.text:
+        if any(e in chunk.text for e in evidence):
             return rank
     return None
 

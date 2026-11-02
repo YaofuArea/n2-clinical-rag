@@ -1,152 +1,178 @@
 [
   {
     "question": "What is a normal A1C level?",
-    "evidence": "A normal A1C level is below 5.7 percent",
-    "doc_id": "a1c-test",
+    "evidence": [
+      "A normal A1C level is below 5.7 percent",
+      "Normal | below 5.7 percent",
+      "Normal | below 5.7%"
+    ],
     "type": "keyword"
   },
   {
     "question": "Do I need to fast before an A1C test?",
-    "evidence": "fast before having your blood drawn for an A1C test",
-    "doc_id": "a1c-test",
+    "evidence": [
+      "fast before having your blood drawn for an A1C test",
+      "You can eat and drink before this test"
+    ],
     "type": "keyword"
   },
   {
     "question": "What A1C goal should most people with diabetes aim for?",
-    "evidence": "their goal is an A1C level below 7%",
-    "doc_id": "managing-diabetes",
+    "evidence": [
+      "their goal is an A1C level below 7%",
+      "by keeping A1C levels below 7 percent"
+    ],
     "type": "keyword"
   },
   {
     "question": "I'm always thirsty and keep running to the bathroom. Could something be wrong with my sugar?",
-    "evidence": "increased urination",
-    "doc_id": "diabetes-symptoms-causes",
+    "evidence": [
+      "increased urination",
+      "urinating too often"
+    ],
     "type": "colloquial"
   },
   {
     "question": "What's the first pill doctors usually give for type 2 diabetes?",
-    "evidence": "Most people with type 2 diabetes start with metformin pills",
-    "doc_id": "diabetes-medicines",
+    "evidence": [
+      "Most people with type 2 diabetes start with metformin pills"
+    ],
     "type": "colloquial"
   },
   {
     "question": "What should be done if my sugar crashes really low?",
-    "evidence": "is the best way to treat severely low blood glucose",
-    "doc_id": "managing-diabetes",
+    "evidence": [
+      "is the best way to treat severely low blood glucose"
+    ],
     "type": "colloquial"
   },
   {
     "question": "Is there a way to take insulin without shots?",
-    "evidence": "You may want to use an insulin inhaler to avoid using needles",
-    "doc_id": "diabetes-medicines",
+    "evidence": [
+      "You may want to use an insulin inhaler to avoid using needles",
+      "instead of using a needle to deliver the insulin"
+    ],
     "type": "colloquial"
   },
   {
     "question": "my thyroid is underactive and I feel tired",
-    "evidence": "especially fatigue and weight gain, are common",
-    "doc_id": "hypothyroidism",
+    "evidence": [
+      "especially fatigue and weight gain, are common"
+    ],
     "type": "colloquial"
   },
   {
     "question": "What does a high TSH level mean?",
-    "evidence": "A high TSH level most often means you have hypothyroidism",
-    "doc_id": "thyroid-tests",
+    "evidence": [
+      "A high TSH level most often means you have hypothyroidism"
+    ],
     "type": "keyword"
   },
   {
     "question": "What medicine is used to treat hypothyroidism?",
-    "evidence": "You will take levothyroxine",
-    "doc_id": "hypothyroidism",
+    "evidence": [
+      "You will take levothyroxine"
+    ],
     "type": "keyword"
   },
   {
     "question": "What is the most common cause of hyperthyroidism?",
-    "evidence": "cause of hyperthyroidism, is an autoimmune disorder",
-    "doc_id": "hyperthyroidism",
+    "evidence": [
+      "cause of hyperthyroidism, is an autoimmune disorder",
+      "Graves’ disease, the most common cause of hyperthyroidism"
+    ],
     "type": "keyword"
   },
   {
     "question": "I'm eating more than ever but still losing weight, and my heart races",
-    "evidence": "weight loss despite an increased appetite",
-    "doc_id": "hyperthyroidism",
+    "evidence": [
+      "weight loss despite an increased appetite"
+    ],
     "type": "colloquial"
   },
   {
     "question": "Can eating seaweed mess with my thyroid?",
-    "evidence": "Seaweed and seaweed-based supplements also contain a lot of iodine",
-    "doc_id": "hyperthyroidism",
+    "evidence": [
+      "Seaweed and seaweed-based supplements also contain a lot of iodine",
+      "other kinds of seaweed—may cause or worsen hypothyroidism",
+      "other kinds of seaweed—may cause or worsen hyperthyroidism"
+    ],
     "type": "colloquial"
   },
   {
     "question": "How soon after starting thyroid pills will I need a blood test?",
-    "evidence": "about 6 to 8 weeks after you begin taking the medicine",
-    "doc_id": "hypothyroidism",
+    "evidence": [
+      "about 6 to 8 weeks after you begin taking the medicine"
+    ],
     "type": "colloquial"
   },
   {
     "question": "What is the most common medicine for high cholesterol?",
-    "evidence": "Statins** are the most common medicine used to treat high blood cholesterol",
-    "doc_id": "cholesterol-treatment",
+    "evidence": [
+      "Statins** are the most common medicine used to treat high blood cholesterol"
+    ],
     "type": "keyword"
   },
   {
     "question": "Do I have to skip breakfast before my cholesterol blood work?",
-    "evidence": "fast for 8 to 12 hours before a panel",
-    "doc_id": "cholesterol-diagnosis",
+    "evidence": [
+      "fast for 8 to 12 hours before a panel"
+    ],
     "type": "colloquial"
   },
   {
     "question": "How often should adults be screened for cholesterol?",
-    "evidence": "Younger adults should be screened every 5 years",
-    "doc_id": "cholesterol-diagnosis",
+    "evidence": [
+      "Younger adults should be screened every 5 years"
+    ],
     "type": "keyword"
   },
   {
     "question": "Will cutting back on burgers and cheese help my bad cholesterol?",
-    "evidence": "Eating a lot of foods high in saturated fats** raises",
-    "doc_id": "cholesterol-causes",
+    "evidence": [
+      "Eating a lot of foods high in saturated fats** raises",
+      "Limiting saturated fats found in fatty cuts of meats"
+    ],
     "type": "colloquial"
   },
   {
     "question": "Can cholesterol pills raise my blood sugar?",
-    "evidence": "can slightly increase the chance that you’ll develop diabetes",
-    "doc_id": "diabetes-symptoms-causes",
+    "evidence": [
+      "can slightly increase the chance that you’ll develop diabetes",
+      "they may raise the risk of diabetes"
+    ],
     "type": "cross-topic"
   },
   {
     "question": "Could a thyroid problem be the reason my cholesterol is high?",
-    "evidence": "Hypothyroidism can contribute to high cholesterol",
-    "doc_id": "hypothyroidism",
+    "evidence": [
+      "Hypothyroidism can contribute to high cholesterol"
+    ],
     "type": "cross-topic"
   },
   {
     "question": "What is the normal range for TSH?",
-    "evidence": null,
-    "doc_id": null,
+    "evidence": [],
     "type": "unanswerable"
   },
   {
     "question": "What dose of levothyroxine should I take?",
-    "evidence": null,
-    "doc_id": null,
+    "evidence": [],
     "type": "unanswerable"
   },
   {
     "question": "How much does an insulin pump cost?",
-    "evidence": null,
-    "doc_id": null,
+    "evidence": [],
     "type": "unanswerable"
   },
   {
     "question": "How do I treat a broken arm?",
-    "evidence": null,
-    "doc_id": null,
+    "evidence": [],
     "type": "unanswerable"
   },
   {
     "question": "What are the symptoms of a migraine?",
-    "evidence": null,
-    "doc_id": null,
+    "evidence": [],
     "type": "unanswerable"
   }
 ]
