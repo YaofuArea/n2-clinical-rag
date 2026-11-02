@@ -10,6 +10,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 DOCS_DIR = Path(__file__).parent / "data" / "docs"
+MIN_SECTION_CHARS = 100  # shorter sections are merged into the next one
 
 
 @dataclass
@@ -77,10 +78,20 @@ def chunk_by_section(max_chars: int) -> list[Chunk]:
                 sections[-1][1].append(line)
 
         i = 0
-        for heading, lines in sections:
+        carry = ""  # a too-short section waiting to be merged into the next one
+        for n, (heading, lines) in enumerate(sections):
             text = "\n".join(lines).strip()
             if not text:
                 continue
+            # A section that is little more than a heading (e.g. "# Title\n\n
+            # **On this page:**") says nothing on its own but can still rank
+            # high, so it is prepended to the next section instead (unless it
+            # is the last section, which has nothing to merge into).
+            text = f"{carry}\n\n{text}" if carry else text
+            if len(text) < MIN_SECTION_CHARS and n < len(sections) - 1:
+                carry = text
+                continue
+            carry = ""
             # Pack paragraphs into pieces no longer than max_chars.
             pieces, current = [], ""
             for para in text.split("\n\n"):
