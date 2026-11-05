@@ -1,9 +1,11 @@
-"""Two ways to find the chunks most relevant to a question.
+"""Four ways to find the chunks most relevant to a question.
 
 - BM25: keyword matching. Rewards chunks that contain the question's words,
   especially rare words.
 - Embedding: semantic matching. A local model turns text into vectors and we
   rank chunks by cosine similarity to the question.
+- Hybrid: BM25 and embedding rankings merged with Reciprocal Rank Fusion.
+- Rerank: embedding search for 20 candidates, reordered by a cross-encoder.
 
 Usage: uv run retrieval.py "What is a normal A1C level?"
 """

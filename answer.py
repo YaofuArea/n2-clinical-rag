@@ -16,7 +16,7 @@ from chunking import STRATEGIES
 from retrieval import EmbeddingRetriever
 
 MODEL = "claude-opus-5-5"
-TOP_K = 3  # section + embedding found the evidence in the top 3 for 18 of 20 questions
+TOP_K = 3  # section + embedding found the evidence in the top 3 for all 20 questions
 
 SYSTEM = """You answer patient health questions using only the documents provided.
 - Use only facts stated in the documents. Do not add facts from your own knowledge.
